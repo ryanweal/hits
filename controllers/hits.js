@@ -1,9 +1,6 @@
 'use strict';
 
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const validator = require('validator');
-const Uuid = require('cassandra-driver').types.Uuid;
 let client = null;
 
 exports.createTable = (init_client) => {
