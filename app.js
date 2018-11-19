@@ -12,6 +12,7 @@ const nodeLimits = require('limits');
 const reqDuration = 2629746000; // 1-month hsts
 
 const auth = require('./controllers/auth.js');
+const hits = require('./controllers/hits.js');
 
 console.log('Node', process.version);
 console.log('info Remember to only run even-numbered (LTS) versions of node in production.');
@@ -30,6 +31,9 @@ function startAsync() {
     // Create any tables here
     .then(client => {
       return auth.createTable(client);
+    })
+    .then(client => {
+      return hits.createTable(client);
     })
     // Start the express server to process requests
     .then(() => {
@@ -88,6 +92,8 @@ function startAsync() {
       app.post('/register', (req, res) => auth.register(req,res));
       app.post('/login', (req, res) => auth.login(req,res));
       app.post('/testcleanup', (req, res) => auth.testcleanup(req,res));
+
+      app.post('/hit', (req, res) => hits.hit(req,res));
 
       app.listen(port, () => console.log(`info Express listening on port ${port}!`))
 

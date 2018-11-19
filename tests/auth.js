@@ -109,4 +109,21 @@ describe('express-cassandra-starter', function () {
     });
 
   });
+
+  describe('hits', function () {
+
+    it('post a /hit', function (done) {
+      request({
+        uri: 'http://localhost:3003/hit',
+        method: 'POST',
+        json: {
+          url: 'http://example.com/'
+        }
+      }, function (err, res, body) {
+        expect(res.statusCode).to.equal(200);
+        done();
+      });
+    });
+
+  });
 });

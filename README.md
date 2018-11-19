@@ -1,8 +1,10 @@
-# express-cassandra-starter
+# hits
 
-This is an express.js based webservice starter kit for services connecting to Apache Cassandra™ and/or DataStax Enterprise using the official `datastax-driver`. This package also includes security-related packages and an example `auth` table and associated endpoint example.
+This is an analytics webservice based on express-cassandra-starter which you can find here: https://github.com/ryanweal/express-cassandra-starter
 
-This is not an official package. It was created by Ryan Weal of Kafei Interactive Inc. (Montréal). Some of the startup code was copied from the `killrvideo-nodejs` as noted below. As a result, this work is licensed similarly as Apache-2.0.
+The package exposes two endpoints:
+  - the example "auth" endpoints (login, register)
+  - a "/hit" endpoint to log a 'url' which has been POSTed
 
 ## Install Steps
 
@@ -25,25 +27,6 @@ SECRET='randomwords' # changing this will expire all issued tokens
     create keyspace mykeyspace with replication = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 } ;
 
 3. Then run `npm run start`.
-
-
-## Colophon
-
-This package makes use of:
-
- - bcrypt (for auth example)
- - bluebird
- - dotenv (sets environment variables locally, not needed in production if you are being very strict)
- - datastax-driver
- - express.js
- - helmet
- - jsonwebtoken (for auth example)
- - limits
- - node.js
- - validator.js
-
-Some code examples (to establish connections with Cassandra) were copied or derived from: https://github.com/KillrVideo/killrvideo-nodejs (also license Apache-2.0). Specifically: src/with-retries.js is used unchanged from the original. I modified src/cassandra.js to enable starting the application in a way I think makes the most sense for serverless startup. Support for the logger and etcd was completely dropped for now. Additionally app.js was used as a starting point, maintaining the same `startAsync` and `stop` functions in structure but otherwise mapping out to express-related functions at the appropriate times.
-
 
 
 ## License

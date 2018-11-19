@@ -1,7 +1,7 @@
 {
-  "name": "express-cassandra-starter",
-  "version": "1.0.2",
-  "description": "Express-Cassandra node.js webservice starter package",
+  "name": "hits",
+  "version": "0.0.1",
+  "description": "URL hit logging service",
   "main": "app.js",
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha tests/auth.js || exit 0",
