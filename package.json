@@ -2,11 +2,11 @@
   "name": "hits",
   "version": "0.0.1",
   "description": "URL hit logging service",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha tests/auth.js || exit 0",
+    "test": "node ./node_modules/mocha/bin/mocha tests/tests.js || exit 0",
     "nsp": "node ./node_modules/nsp/bin/nsp check",
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "pre-commit": [
     "nsp"
