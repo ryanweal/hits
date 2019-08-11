@@ -57,12 +57,36 @@ exports.hit = async (req, res) => {
   const url = req.body.url;
 
   // submit values to server
-  client.execute(`INSERT INTO hits (hit, ip, url) VALUES (?, ?, ?) IF NOT EXISTS USING TTL 2629800`, [hit, ip, url], {
-      prepare: true
-    })
-    .then(result => {
-      res.status(200).json({
-        status: 'Success'
-      });
+  Promise.all([
+      client.execute(`INSERT INTO hits (hit, ip, url) VALUES (?, ?, ?) IF NOT EXISTS USING TTL 2629800`, [hit, ip, url], {
+        prepare: true
+      }),
+      client.execute(`UPDATE counter SET popularity = popularity + 1 where url = ?`, [url], {
+        prepare: true
+      }),
+      client.execute(`select * from counter where url = ?`, [url], {
+        prepare: true
+      })
+      .then(result => {
+        return {count: result.rows[0]}
+      }),
+      client.execute(`select count(*) from hits where url = ?`, [url], {
+        prepare: true
+      })
+      .then(result => {
+        return {recent: result.rows[0]}
+      })
+    ])
+    .then((values) => {
+      const value =  values.filter(item => item !== undefined && item.count);
+      const recent =  values.filter(item => item !== undefined && item.recent);
+      const result = {
+        status: 'Success',
+        url: value[0].count.url,
+        count: value[0].count.popularity,
+        recent: recent[0].recent.count
+      }
+      console.log('result', result);
+      res.status(200).json(result);
     });
 };

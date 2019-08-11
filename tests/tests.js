@@ -10,7 +10,7 @@ describe('express-cassandra-starter', function () {
 
     it('post /testcleanup to clear any previous run', function (done) {
       request({
-        uri: 'http://localhost:3003/testcleanup',
+        uri: 'http://localhost:4000/testcleanup',
         method: 'POST',
         json: {}
       }, function (err, res, body) {
@@ -20,7 +20,7 @@ describe('express-cassandra-starter', function () {
     });
 
     it('get /login should be 404', function (done) {
-      request.get('http://localhost:3003/login', function (err, res, body) {
+      request.get('http://localhost:4000/login', function (err, res, body) {
         expect(res.statusCode).to.equal(404);
         done();
       });
@@ -28,7 +28,7 @@ describe('express-cassandra-starter', function () {
 
     it('post /register with valid info', function (done) {
       request({
-        uri: 'http://localhost:3003/register',
+        uri: 'http://localhost:4000/register',
         method: 'POST',
         json: {
           email: 'test@example.com',
@@ -43,7 +43,7 @@ describe('express-cassandra-starter', function () {
 
     it('post /register with invalid info (short password) fails', function (done) {
       request({
-        uri: 'http://localhost:3003/register',
+        uri: 'http://localhost:4000/register',
         method: 'POST',
         json: {
           email: 'test2@example.com',
@@ -57,7 +57,7 @@ describe('express-cassandra-starter', function () {
 
     it('post /register with invalid info (long password) fails', function (done) {
       request({
-        uri: 'http://localhost:3003/register',
+        uri: 'http://localhost:4000/register',
         method: 'POST',
         json: {
           email: 'test2@example.com',
@@ -71,7 +71,7 @@ describe('express-cassandra-starter', function () {
 
     it('post /login with valid info passes', function (done) {
       request({
-        uri: 'http://localhost:3003/login',
+        uri: 'http://localhost:4000/login',
         method: 'POST',
         json: {
           email: 'test@example.com',
@@ -85,7 +85,7 @@ describe('express-cassandra-starter', function () {
 
     it('post /testcleanup to clear the account away', function (done) {
       request({
-        uri: 'http://localhost:3003/testcleanup',
+        uri: 'http://localhost:4000/testcleanup',
         method: 'POST',
         json: {}
       }, function (err, res, body) {
@@ -96,7 +96,7 @@ describe('express-cassandra-starter', function () {
 
     it('post /login with valid info for closed account fails', function (done) {
       request({
-        uri: 'http://localhost:3003/login',
+        uri: 'http://localhost:4000/login',
         method: 'POST',
         json: {
           email: 'test@example.com',
@@ -114,7 +114,7 @@ describe('express-cassandra-starter', function () {
 
     it('post a /hit', function (done) {
       request({
-        uri: 'http://localhost:3003/hit',
+        uri: 'http://localhost:4000/hit',
         method: 'POST',
         json: {
           url: 'http://example.com/'

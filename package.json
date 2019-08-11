@@ -8,9 +8,6 @@
     "nsp": "node ./node_modules/nsp/bin/nsp check",
     "start": "node index.js"
   },
-  "pre-commit": [
-    "nsp"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ryanweal/express-cassandra-starter.git"
@@ -38,7 +35,6 @@
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "nsp": "^3.2.1",
-    "pre-commit": "^1.2.2",
     "request": "^2.88.0"
   }
 }

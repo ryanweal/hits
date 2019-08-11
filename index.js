@@ -13,6 +13,7 @@ const reqDuration = 2629746000; // 1-month hsts
 
 const auth = require('./controllers/auth.js');
 const hits = require('./controllers/hits.js');
+const counter = require('./controllers/counter.js');
 
 console.log('Node', process.version);
 console.log('info Remember to only run even-numbered (LTS) versions of node in production.');
@@ -34,6 +35,9 @@ function startAsync() {
     })
     .then(client => {
       return hits.createTable(client);
+    })
+    .then(client => {
+      return counter.createTable(client);
     })
     // Start the express server to process requests
     .then(() => {
@@ -85,7 +89,7 @@ function startAsync() {
         inc_req_timeout: 1000*60  // 60 seconds 
       }))
 
-      const port = 3003;
+      const port = 4000;
 
       app.get('/', (req, res) => res.send('Hello World!'));
 
